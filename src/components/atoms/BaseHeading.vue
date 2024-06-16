@@ -4,14 +4,14 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'BaseHeading',
   props: {
     level: {
       type: Number,
       default: 1,
-      validator(value) {
+      validator(value: number) {
         return value >= 1 && value <= 6;
       }
     },

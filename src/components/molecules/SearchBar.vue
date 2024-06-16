@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import InputField from '../atoms/BaseInputField.vue';
 import BaseButton from '../atoms/BaseButton.vue';
 

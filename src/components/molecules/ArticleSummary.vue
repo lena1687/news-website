@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Heading from '../atoms/BaseHeading.vue';
 import Paragraph from '../atoms/BaseParagraph.vue';
 

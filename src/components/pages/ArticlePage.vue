@@ -4,7 +4,7 @@
   </MainTemplate>
 </template>
 
-<script>
+<script lang="ts">
 import MainTemplate from '../templates/MainTemplate.vue';
 import ArticleDetail from '../organisms/ArticleDetail.vue';
 

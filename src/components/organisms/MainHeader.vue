@@ -5,7 +5,7 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
 import SearchBar from '../molecules/SearchBar.vue';
 
 export default {
