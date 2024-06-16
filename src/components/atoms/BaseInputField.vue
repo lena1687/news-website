@@ -2,7 +2,7 @@
   <input :type="type" :value="value" :placeholder="placeholder" />
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'InputField',
   props: {
