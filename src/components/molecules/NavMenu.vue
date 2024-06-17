@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { NewsCategory } from "@/types/newsCategory";
+import { NewsCategory } from "@/shared/enums/newsCategory";
 
 export default defineComponent({
   name: "NavMenu",
