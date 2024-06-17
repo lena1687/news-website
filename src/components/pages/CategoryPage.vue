@@ -1,6 +1,6 @@
 <template>
   <MainTemplate>
-    <h1>HomePage</h1>
+    <h1>CategoryPage</h1>
     <ArticleList />
   </MainTemplate>
 </template>
@@ -10,7 +10,7 @@ import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
 
 export default {
-  name: "HomePage",
+  name: "CategoryPage",
   components: {
     MainTemplate,
     ArticleList,
