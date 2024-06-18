@@ -4,32 +4,50 @@
       <li
         v-for="category in categories"
         :key="category"
-        :class="{ active: category === activeCategory }"
+        :class="{ active: isActive(category) }"
+        @click="navigateToCategory(category)"
       >
-        <router-link :to="`/category/${category}`">{{ category }}</router-link>
+        {{ category }}
       </li>
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent } from "vue";
 import { NewsCategory } from "@/types/newsTypes";
+import { useNewsStore } from "@/stores/newsStore";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   name: "NavMenu",
-  props: {
-    activeCategory: {
-      type: String as PropType<NewsCategory>,
-      required: true,
-    },
-  },
   setup() {
-    const categories = Object.values(NewsCategory);
+    const router = useRouter();
+    const route = useRoute();
+    const newsStore = useNewsStore();
+    const categories: NewsCategory[] = Object.values(NewsCategory);
+
+    const isActive = (category: NewsCategory) => {
+      return category === route.params.category;
+    };
+
+    const navigateToCategory = (category: NewsCategory) => {
+      const country = route.params.country as string;
+      newsStore.setActiveCategory(category);
+      router.push({ path: `/${country}/category/${category}` });
+    };
 
     return {
       categories,
+      isActive,
+      navigateToCategory,
     };
   },
 });
 </script>
+
+<style scoped>
+.active {
+  font-weight: bold;
+}
+</style>

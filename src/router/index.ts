@@ -1,18 +1,36 @@
 import HomePage from "../components/pages/HomePage.vue";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
+import { NewsCategory } from "@/types/newsTypes";
+import { CountryCodes } from "@/types/commonTypes";
 
-const routes = [
+interface RouteParams {
+  country: CountryCodes;
+  category?: NewsCategory;
+}
+
+const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "Home",
+    path: `/:country(${Object.values(CountryCodes).join("|")})/`,
+    name: "home",
     component: HomePage,
+    props: (route) => ({ country: route.params.country as CountryCodes }),
   },
   {
-    path: "/category/:category",
-    name: "Category",
+    path: `/:country(${Object.values(CountryCodes).join(
+      "|"
+    )})/category/:category(${Object.values(NewsCategory).join("|")})`,
+    name: "category",
     component: CategoryPage,
-    props: true,
+    props: (route) => ({
+      country: route.params.country as CountryCodes,
+      category: route.params.category as NewsCategory,
+    }),
+  },
+
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: `/${CountryCodes.US}/`,
   },
 ];
 

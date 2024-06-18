@@ -2,17 +2,23 @@
   <DropdownIcon
     :items="countries"
     @selectItem="onCountryChange"
-    :defaultItem="selectedCountry"
+    :defaultItem="defaultCountry"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import DropdownIcon from "@/components/molecules/DropdownIcon.vue";
 import emojione from "emojione";
 import { CountryCodes } from "@/types/commonTypes";
 import { useNewsStore } from "@/stores/newsStore";
 import { countryCodeToEmoji } from "@/utils/common";
+import { useRoute, useRouter } from "vue-router";
+
+interface CountryItem {
+  text: CountryCodes;
+  icon: string;
+}
 
 export default defineComponent({
   name: "DropdownCountry",
@@ -37,23 +43,28 @@ export default defineComponent({
   },
 
   setup() {
+    const route = useRoute();
+    const router = useRouter();
     const newsStore = useNewsStore();
-    const countryCode = ref(newsStore.getCountry).value;
-    const selectedCountry = {
+    const countryCode =
+      (route.params.country as CountryCodes) || CountryCodes.US;
+    const defaultCountry: CountryItem = {
       text: countryCode,
       icon: emojione.toImage(emojione.toImage(countryCodeToEmoji(countryCode))),
     };
+    const selectedCountry = ref(countryCode);
 
-    const onCountryChange = ({
-      text,
-    }: {
-      text: CountryCodes;
-      icon: string;
-    }): void => {
-      newsStore.setCountry(text);
+    watch(selectedCountry, (newCountry) => {
+      router.push({ params: { country: newCountry } });
+    });
+
+    const onCountryChange = (country: CountryItem) => {
+      selectedCountry.value = country.text;
+      newsStore.setCountry(selectedCountry.value);
     };
 
     return {
+      defaultCountry,
       selectedCountry,
       onCountryChange,
     };

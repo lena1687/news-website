@@ -1,13 +1,13 @@
 import { CountryCodes } from "@/types/commonTypes";
 
 export enum NewsCategory {
-  General = "General",
-  Business = "Business",
-  Entertainment = "Entertainment",
-  Health = "Health",
-  Science = "Science",
-  Sports = "Sports",
-  Technology = "Technology",
+  General = "general",
+  Business = "business",
+  Entertainment = "entertainment",
+  Health = "health",
+  Science = "science",
+  Sports = "sports",
+  Technology = "technology",
 }
 
 export interface Article {

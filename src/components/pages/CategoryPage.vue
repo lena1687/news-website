@@ -14,6 +14,7 @@ import { useNewsStore } from "@/stores/newsStore";
 import { NewsCategory } from "@/types/newsTypes";
 import ArticleList from "@/components/organisms/ArticleList.vue";
 import MainTemplate from "@/components/templates/MainTemplate.vue";
+import { CountryCodes } from "@/types/commonTypes";
 
 export default defineComponent({
   name: "CategoryPage",
@@ -26,16 +27,30 @@ export default defineComponent({
     const newsStore = useNewsStore();
 
     const activeCategory = computed(() => {
-      return (route.params.category as NewsCategory) || NewsCategory.General;
+      const category = route.params.category as string;
+      return Object.values(NewsCategory).includes(category as NewsCategory)
+        ? (category as NewsCategory)
+        : NewsCategory.General;
+    });
+
+    const country = computed(() => {
+      const countryParam = route.params.country as string;
+      return Object.values(CountryCodes).includes(countryParam as CountryCodes)
+        ? (countryParam as CountryCodes)
+        : CountryCodes.US;
     });
 
     const articles = computed(() => newsStore.getArticles);
 
     watch(
-      activeCategory,
-      (newCategory) => {
-        if (newsStore.getActiveCategory !== newCategory) {
+      [activeCategory, country],
+      ([newCategory, newCountry]) => {
+        if (
+          newsStore.getActiveCategory !== newCategory ||
+          newsStore.getCountry !== newCountry
+        ) {
           newsStore.setActiveCategory(newCategory);
+          newsStore.setCountry(newCountry);
         }
       },
       { immediate: true }
@@ -43,6 +58,7 @@ export default defineComponent({
 
     return {
       activeCategory,
+      country,
       articles,
     };
   },
