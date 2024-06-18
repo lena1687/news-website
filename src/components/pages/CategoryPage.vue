@@ -27,20 +27,20 @@ export default defineComponent({
     const newsStore = useNewsStore();
 
     const activeCategory = computed(() => {
-      const category = route.params.category as string;
+      const category = route.params.category as NewsCategory;
       return Object.values(NewsCategory).includes(category as NewsCategory)
         ? (category as NewsCategory)
         : NewsCategory.General;
     });
 
     const country = computed(() => {
-      const countryParam = route.params.country as string;
+      const countryParam = route.params.country as CountryCodes;
       return Object.values(CountryCodes).includes(countryParam as CountryCodes)
         ? (countryParam as CountryCodes)
         : CountryCodes.US;
     });
 
-    const articles = computed(() => newsStore.getArticles);
+    newsStore.initializeStore(country.value, activeCategory.value);
 
     watch(
       [activeCategory, country],
@@ -55,6 +55,8 @@ export default defineComponent({
       },
       { immediate: true }
     );
+
+    const articles = computed(() => newsStore.articles);
 
     return {
       activeCategory,

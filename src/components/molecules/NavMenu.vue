@@ -16,7 +16,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { NewsCategory } from "@/types/newsTypes";
-import { useNewsStore } from "@/stores/newsStore";
 import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
@@ -24,7 +23,6 @@ export default defineComponent({
   setup() {
     const router = useRouter();
     const route = useRoute();
-    const newsStore = useNewsStore();
     const categories: NewsCategory[] = Object.values(NewsCategory);
 
     const isActive = (category: NewsCategory) => {
@@ -33,7 +31,6 @@ export default defineComponent({
 
     const navigateToCategory = (category: NewsCategory) => {
       const country = route.params.country as string;
-      newsStore.setActiveCategory(category);
       router.push({ path: `/${country}/category/${category}` });
     };
 

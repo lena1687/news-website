@@ -9,6 +9,9 @@ import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
 import { computed, onMounted } from "vue";
 import { useNewsStore } from "@/stores/newsStore";
+import { useRoute } from "vue-router";
+import { NewsCategory } from "@/types/newsTypes";
+import { CountryCodes } from "@/types/commonTypes";
 
 export default {
   name: "HomePage",
@@ -17,11 +20,14 @@ export default {
     ArticleList,
   },
   setup() {
+    const route = useRoute();
     const newsStore = useNewsStore();
     const articles = computed(() => newsStore.getArticles);
 
     onMounted(() => {
-      newsStore.fetchArticles();
+      const country = (route.params.country as CountryCodes) || CountryCodes.US;
+      const category = NewsCategory.General;
+      newsStore.initializeStore(country, category);
     });
 
     return {
