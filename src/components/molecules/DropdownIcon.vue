@@ -46,7 +46,7 @@ export default defineComponent({
       this.selectedItem = this.defaultItem;
     }
   },
-  setup() {
+  setup(props, { emit }) {
     const isOpen = ref(false);
     const selectedItem = ref<DropdownItem | null>(null);
 
@@ -55,6 +55,7 @@ export default defineComponent({
     };
 
     const selectItem = (item: DropdownItem) => {
+      emit("select-item", item);
       selectedItem.value = item;
       isOpen.value = false;
     };

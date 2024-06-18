@@ -1,15 +1,24 @@
 <template>
   <DropdownIcon
     :items="countries"
-    @selectItem="selectCountry"
+    @selectItem="onCountryChange"
     :defaultItem="defaultCountry"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import DropdownIcon from "@/components/molecules/DropdownIcon.vue";
 import emojione from "emojione";
+import { CountryCodes } from "@/types/commonTypes";
+import { useNewsStore } from "@/stores/newsStore";
+import { countryCodeToEmoji } from "@/utils/common";
+import { useRoute, useRouter } from "vue-router";
+
+interface CountryItem {
+  text: CountryCodes;
+  icon: string;
+}
 
 export default defineComponent({
   name: "DropdownCountry",
@@ -17,17 +26,48 @@ export default defineComponent({
   data() {
     return {
       countries: [
-        { text: "Netherlands", icon: emojione.toImage("🇳🇱") },
-        { text: "United Kingdom", icon: emojione.toImage("🇬🇧") },
-        { text: "United States", icon: emojione.toImage("🇺🇸") },
+        {
+          text: CountryCodes.NL,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.NL)),
+        },
+        {
+          text: CountryCodes.GB,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.GB)),
+        },
+        {
+          text: CountryCodes.US,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.US)),
+        },
       ],
-      defaultCountry: { text: "United States", icon: emojione.toImage("🇺🇸") },
     };
   },
-  methods: {
-    selectCountry(country: { text: string; icon: string }) {
-      this.defaultCountry = country;
-    },
+
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const newsStore = useNewsStore();
+    const countryCode =
+      (route.params.country as CountryCodes) || CountryCodes.US;
+    const defaultCountry: CountryItem = {
+      text: countryCode,
+      icon: emojione.toImage(emojione.toImage(countryCodeToEmoji(countryCode))),
+    };
+    const selectedCountry = ref(countryCode);
+
+    watch(selectedCountry, (newCountry) => {
+      router.push({ params: { country: newCountry } });
+    });
+
+    const onCountryChange = (country: CountryItem) => {
+      selectedCountry.value = country.text;
+      newsStore.setCountry(selectedCountry.value);
+    };
+
+    return {
+      defaultCountry,
+      selectedCountry,
+      onCountryChange,
+    };
   },
 });
 </script>

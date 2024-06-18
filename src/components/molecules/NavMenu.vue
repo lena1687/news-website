@@ -1,8 +1,13 @@
 <template>
   <nav>
     <ul>
-      <li v-for="category in categories" :key="category">
-        <router-link :to="`/category/${category}`">{{ category }}</router-link>
+      <li
+        v-for="category in categories"
+        :key="category"
+        :class="{ active: isActive(category) }"
+        @click="navigateToCategory(category)"
+      >
+        {{ category }}
       </li>
     </ul>
   </nav>
@@ -10,14 +15,36 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { NewsCategory } from "@/shared/enums/newsCategory";
+import { NewsCategory } from "@/types/newsTypes";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   name: "NavMenu",
-  computed: {
-    categories(): NewsCategory[] {
-      return Object.values(NewsCategory);
-    },
+  setup() {
+    const router = useRouter();
+    const route = useRoute();
+    const categories: NewsCategory[] = Object.values(NewsCategory);
+
+    const isActive = (category: NewsCategory) => {
+      return category === route.params.category;
+    };
+
+    const navigateToCategory = (category: NewsCategory) => {
+      const country = route.params.country as string;
+      router.push({ path: `/${country}/category/${category}` });
+    };
+
+    return {
+      categories,
+      isActive,
+      navigateToCategory,
+    };
   },
 });
 </script>
+
+<style scoped>
+.active {
+  font-weight: bold;
+}
+</style>
