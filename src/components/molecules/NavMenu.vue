@@ -1,7 +1,11 @@
 <template>
   <nav>
     <ul>
-      <li v-for="category in categories" :key="category">
+      <li
+        v-for="category in categories"
+        :key="category"
+        :class="{ active: category === activeCategory }"
+      >
         <router-link :to="`/category/${category}`">{{ category }}</router-link>
       </li>
     </ul>
@@ -9,15 +13,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { NewsCategory } from "@/shared/enums/newsCategory";
+import { defineComponent, PropType } from "vue";
+import { NewsCategory } from "@/types/newsTypes";
 
 export default defineComponent({
   name: "NavMenu",
-  computed: {
-    categories(): NewsCategory[] {
-      return Object.values(NewsCategory);
+  props: {
+    activeCategory: {
+      type: String as PropType<NewsCategory>,
+      required: true,
     },
+  },
+  setup() {
+    const categories = Object.values(NewsCategory);
+
+    return {
+      categories,
+    };
   },
 });
 </script>

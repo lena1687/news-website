@@ -1,23 +1,18 @@
 import HomePage from "../components/pages/HomePage.vue";
-import ArticlePage from "../components/pages/ArticlePage.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
 
 const routes = [
   {
     path: "/",
-    name: "HomePage",
+    name: "Home",
     component: HomePage,
   },
   {
-    path: "/category/:id",
-    name: "CategoryPage",
+    path: "/category/:category",
+    name: "Category",
     component: CategoryPage,
-  },
-  {
-    path: "/article/:id",
-    name: "ArticlePage",
-    component: ArticlePage,
+    props: true,
   },
 ];
 

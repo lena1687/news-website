@@ -1,15 +1,18 @@
 <template>
   <DropdownIcon
     :items="countries"
-    @selectItem="selectCountry"
-    :defaultItem="defaultCountry"
+    @selectItem="onCountryChange"
+    :defaultItem="selectedCountry"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import DropdownIcon from "@/components/molecules/DropdownIcon.vue";
 import emojione from "emojione";
+import { CountryCodes } from "@/types/commonTypes";
+import { useNewsStore } from "@/stores/newsStore";
+import { countryCodeToEmoji } from "@/utils/common";
 
 export default defineComponent({
   name: "DropdownCountry",
@@ -17,17 +20,43 @@ export default defineComponent({
   data() {
     return {
       countries: [
-        { text: "Netherlands", icon: emojione.toImage("🇳🇱") },
-        { text: "United Kingdom", icon: emojione.toImage("🇬🇧") },
-        { text: "United States", icon: emojione.toImage("🇺🇸") },
+        {
+          text: CountryCodes.NL,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.NL)),
+        },
+        {
+          text: CountryCodes.GB,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.GB)),
+        },
+        {
+          text: CountryCodes.US,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.US)),
+        },
       ],
-      defaultCountry: { text: "United States", icon: emojione.toImage("🇺🇸") },
     };
   },
-  methods: {
-    selectCountry(country: { text: string; icon: string }) {
-      this.defaultCountry = country;
-    },
+
+  setup() {
+    const newsStore = useNewsStore();
+    const countryCode = ref(newsStore.getCountry).value;
+    const selectedCountry = {
+      text: countryCode,
+      icon: emojione.toImage(emojione.toImage(countryCodeToEmoji(countryCode))),
+    };
+
+    const onCountryChange = ({
+      text,
+    }: {
+      text: CountryCodes;
+      icon: string;
+    }): void => {
+      newsStore.setCountry(text);
+    };
+
+    return {
+      selectedCountry,
+      onCountryChange,
+    };
   },
 });
 </script>

@@ -7,7 +7,7 @@
       <DropdownCountry />
     </div>
     <div>
-      <NavMenu />
+      <NavMenu :activeCategory="activeCategory" />
     </div>
   </header>
 </template>
@@ -19,6 +19,8 @@ import HeaderHeading from "@/components/molecules/HeaderHeading.vue";
 import IconText from "@/components/molecules/IconText.vue";
 import NavMenu from "@/components/molecules/NavMenu.vue";
 import DropdownCountry from "@/components/organisms/DropdownCountry.vue";
+import { computed } from "vue";
+import { useNewsStore } from "@/stores/newsStore";
 
 export default {
   name: "MainHeader",
@@ -29,6 +31,14 @@ export default {
     HeaderHeading,
     CurrentTime,
     SearchBar,
+  },
+  setup() {
+    const newsStore = useNewsStore();
+    const activeCategory = computed(() => newsStore.getActiveCategory);
+
+    return {
+      activeCategory,
+    };
   },
 };
 </script>
