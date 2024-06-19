@@ -1,14 +1,25 @@
 <template>
-  <input :type="type" :value="value" :placeholder="placeholder" />
+  <input
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+    @keyup.enter="$emit('enter')"
+    type="text"
+    :placeholder="placeholder"
+  />
 </template>
 
 <script lang="ts">
 export default {
-  name: 'InputField',
+  name: "InputField",
   props: {
-    type: String,
-    value: String,
-    placeholder: String
-  }
+    modelValue: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      default: "",
+    },
+  },
 };
 </script>

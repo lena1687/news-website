@@ -1,6 +1,7 @@
 <template>
   <MainTemplate>
     <div>
+      <h1>CategoryPage</h1>
       <h2>{{ activeCategory }}</h2>
       <ArticleList :articles="articles" />
     </div>
@@ -9,12 +10,9 @@
 
 <script lang="ts">
 import { defineComponent, computed, watch } from "vue";
-import { useRoute } from "vue-router";
 import { useNewsStore } from "@/stores/newsStore";
-import { NewsCategory } from "@/types/newsTypes";
 import ArticleList from "@/components/organisms/ArticleList.vue";
 import MainTemplate from "@/components/templates/MainTemplate.vue";
-import { CountryCodes } from "@/types/commonTypes";
 
 export default defineComponent({
   name: "CategoryPage",
@@ -23,44 +21,24 @@ export default defineComponent({
     ArticleList,
   },
   setup() {
-    const route = useRoute();
     const newsStore = useNewsStore();
+    const articles = computed(() => newsStore.articles);
+    const params = computed(() => newsStore.params);
 
     const activeCategory = computed(() => {
-      const category = route.params.category as NewsCategory;
-      return Object.values(NewsCategory).includes(category as NewsCategory)
-        ? (category as NewsCategory)
-        : NewsCategory.General;
+      return newsStore.getParams.category;
     });
-
-    const country = computed(() => {
-      const countryParam = route.params.country as CountryCodes;
-      return Object.values(CountryCodes).includes(countryParam as CountryCodes)
-        ? (countryParam as CountryCodes)
-        : CountryCodes.US;
-    });
-
-    newsStore.initializeStore(country.value, activeCategory.value);
 
     watch(
-      [activeCategory, country],
-      ([newCategory, newCountry]) => {
-        if (
-          newsStore.getActiveCategory !== newCategory ||
-          newsStore.getCountry !== newCountry
-        ) {
-          newsStore.setActiveCategory(newCategory);
-          newsStore.setCountry(newCountry);
-        }
+      params,
+      (newParams) => {
+        newsStore.fetchArticles(newParams);
       },
       { immediate: true }
     );
 
-    const articles = computed(() => newsStore.articles);
-
     return {
       activeCategory,
-      country,
       articles,
     };
   },

@@ -1,15 +1,14 @@
 <template>
-  <button :class="className" @click="onClick">
+  <button @click="$emit('click')" :class="className">
     <slot></slot>
   </button>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'BaseButton',
+  name: "BaseButton",
   props: {
     className: String,
-    onClick: Function
-  }
+  },
 };
 </script>

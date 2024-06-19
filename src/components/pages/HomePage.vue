@@ -1,5 +1,6 @@
 <template>
   <MainTemplate>
+    <h1>HomePage</h1>
     <ArticleList :articles="articles" />
   </MainTemplate>
 </template>
@@ -7,11 +8,8 @@
 <script lang="ts">
 import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
-import { computed, onMounted } from "vue";
+import { computed, watch } from "vue";
 import { useNewsStore } from "@/stores/newsStore";
-import { useRoute } from "vue-router";
-import { NewsCategory } from "@/types/newsTypes";
-import { CountryCodes } from "@/types/commonTypes";
 
 export default {
   name: "HomePage",
@@ -20,15 +18,17 @@ export default {
     ArticleList,
   },
   setup() {
-    const route = useRoute();
     const newsStore = useNewsStore();
     const articles = computed(() => newsStore.getArticles);
+    const params = computed(() => newsStore.params);
 
-    onMounted(() => {
-      const country = (route.params.country as CountryCodes) || CountryCodes.US;
-      const category = NewsCategory.General;
-      newsStore.initializeStore(country, category);
-    });
+    watch(
+      params,
+      (newParams) => {
+        newsStore.fetchArticles(newParams);
+      },
+      { immediate: true }
+    );
 
     return {
       articles,

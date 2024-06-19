@@ -1,55 +1,33 @@
 import { defineStore } from "pinia";
 import { fetchArticles } from "@/services/newsService";
 import { Article, NewsCategory, NewsState } from "@/types/newsTypes";
-import { CountryCodes } from "@/types/commonTypes";
+import { CountryCode } from "@/types/commonTypes";
 
 export const useNewsStore = defineStore("news", {
   state: (): NewsState => ({
     articles: [],
-    searchQuery: "",
-    activeCategory: NewsCategory.General,
-    country: CountryCodes.US,
-    cache: new Map<string, Article[]>(),
+    params: { country: CountryCode.US, category: NewsCategory.General },
   }),
   actions: {
-    async fetchArticles(): Promise<void> {
-      const cacheKey = `${this.country}-${this.activeCategory}`;
-      if (this.cache.has(cacheKey)) {
-        this.articles = this.cache.get(cacheKey)!;
-        return;
-      }
-
+    async fetchArticles({
+      country,
+      category,
+      query,
+    }: NewsState["params"]): Promise<void> {
       try {
-        const articles = await fetchArticles(this.country, this.activeCategory);
+        const articles = await fetchArticles(country, category, query);
         this.articles = filterAndFormatArticles(articles);
-        this.cache.set(cacheKey, articles);
       } catch (error) {
         console.error("Error fetching articles:", error);
       }
     },
-    setActiveCategory(category: NewsCategory): void {
-      if (this.activeCategory !== category) {
-        this.activeCategory = category;
-        this.fetchArticles();
-      }
-    },
-    setCountry(country: CountryCodes): void {
-      if (this.country !== country) {
-        this.country = country;
-        this.fetchArticles();
-      }
-    },
-    initializeStore(country: CountryCodes, category: NewsCategory) {
-      this.country = country;
-      this.activeCategory = category;
-      this.fetchArticles();
+    setParams(params: NewsState["params"]): void {
+      this.params = params;
     },
   },
   getters: {
     getArticles: (state) => state.articles,
-    getSearchQuery: (state) => state.searchQuery,
-    getActiveCategory: (state) => state.activeCategory,
-    getCountry: (state) => state.country,
+    getParams: (state) => state.params,
   },
 });
 
