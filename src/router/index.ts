@@ -2,41 +2,50 @@ import HomePage from "../components/pages/HomePage.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
 import { NewsCategory } from "@/types/newsTypes";
-import { CountryCodes } from "@/types/commonTypes";
+import { CountryCode } from "@/types/commonTypes";
+import { useNewsStore } from "@/stores/newsStore";
 
 interface RouteParams {
-  country: CountryCodes;
+  country: CountryCode;
   category?: NewsCategory;
 }
 
+const countryPath = `:country(${Object.values(CountryCode).join("|")})`;
+const categoryPath = `:category(${Object.values(NewsCategory).join("|")})`;
+const defaultPath = `${CountryCode.US}/${NewsCategory.General}`;
+
 const routes: Array<RouteRecordRaw> = [
   {
-    path: `/:country(${Object.values(CountryCodes).join("|")})/`,
+    path: `/${countryPath}/:category(${NewsCategory.General})`,
     name: "home",
     component: HomePage,
-    props: (route) => ({ country: route.params.country as CountryCodes }),
   },
   {
-    path: `/:country(${Object.values(CountryCodes).join(
-      "|"
-    )})/category/:category(${Object.values(NewsCategory).join("|")})`,
+    path: `/${countryPath}/${categoryPath}`,
     name: "category",
     component: CategoryPage,
-    props: (route) => ({
-      country: route.params.country as CountryCodes,
-      category: route.params.category as NewsCategory,
-    }),
   },
 
   {
-    path: "/:pathMatch(.*)*",
-    redirect: `/${CountryCodes.US}/`,
+    path: "/",
+    redirect: `/${defaultPath}`,
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from) => {
+  const newsStore = useNewsStore();
+  const { country, category } = to.params;
+  const query = to.query.search as string;
+  newsStore.setParams({
+    country: country as CountryCode,
+    category: category as NewsCategory,
+    query,
+  });
 });
 
 export default router;

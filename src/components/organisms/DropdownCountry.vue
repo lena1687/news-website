@@ -7,16 +7,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { computed, defineComponent } from "vue";
 import DropdownIcon from "@/components/molecules/DropdownIcon.vue";
 import emojione from "emojione";
-import { CountryCodes } from "@/types/commonTypes";
-import { useNewsStore } from "@/stores/newsStore";
+import { CountryCode } from "@/types/commonTypes";
 import { countryCodeToEmoji } from "@/utils/common";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
+import { useNewsStore } from "@/stores/newsStore";
 
 interface CountryItem {
-  text: CountryCodes;
+  text: CountryCode;
   icon: string;
 }
 
@@ -27,45 +27,38 @@ export default defineComponent({
     return {
       countries: [
         {
-          text: CountryCodes.NL,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.NL)),
+          text: CountryCode.NL,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCode.NL)),
         },
         {
-          text: CountryCodes.GB,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.GB)),
+          text: CountryCode.GB,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCode.GB)),
         },
         {
-          text: CountryCodes.US,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCodes.US)),
+          text: CountryCode.US,
+          icon: emojione.toImage(countryCodeToEmoji(CountryCode.US)),
         },
       ],
     };
   },
 
   setup() {
-    const route = useRoute();
     const router = useRouter();
     const newsStore = useNewsStore();
-    const countryCode =
-      (route.params.country as CountryCodes) || CountryCodes.US;
+    const countryCode = computed(() => newsStore.params.country);
     const defaultCountry: CountryItem = {
-      text: countryCode,
-      icon: emojione.toImage(emojione.toImage(countryCodeToEmoji(countryCode))),
+      text: countryCode.value,
+      icon: emojione.toImage(
+        emojione.toImage(countryCodeToEmoji(countryCode.value))
+      ),
     };
-    const selectedCountry = ref(countryCode);
-
-    watch(selectedCountry, (newCountry) => {
-      router.push({ params: { country: newCountry } });
-    });
 
     const onCountryChange = (country: CountryItem) => {
-      selectedCountry.value = country.text;
-      newsStore.setCountry(selectedCountry.value);
+      router.push({ params: { country: country.text } });
     };
 
     return {
       defaultCountry,
-      selectedCountry,
       onCountryChange,
     };
   },

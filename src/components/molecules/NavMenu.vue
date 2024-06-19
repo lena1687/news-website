@@ -14,24 +14,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { NewsCategory } from "@/types/newsTypes";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
+import { useNewsStore } from "@/stores/newsStore";
 
 export default defineComponent({
   name: "NavMenu",
   setup() {
     const router = useRouter();
-    const route = useRoute();
     const categories: NewsCategory[] = Object.values(NewsCategory);
+    const newsStore = useNewsStore();
+    const category = computed(() => newsStore.params.category);
 
-    const isActive = (category: NewsCategory) => {
-      return category === route.params.category;
+    const isActive = (currentCategory: NewsCategory) => {
+      return currentCategory === category.value;
     };
 
-    const navigateToCategory = (category: NewsCategory) => {
-      const country = route.params.country as string;
-      router.push({ path: `/${country}/category/${category}` });
+    const navigateToCategory = (newCategory: NewsCategory) => {
+      const name = newCategory === NewsCategory.General ? "home" : "category";
+      router.push({ params: { category: newCategory }, name });
     };
 
     return {

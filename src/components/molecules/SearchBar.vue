@@ -1,29 +1,49 @@
 <template>
-  <div>
-    <InputField v-model="query" placeholder="Search for news..." />
-    <BaseButton @click="search">Search</BaseButton>
+  <div class="search-bar">
+    <InputField v-model="query" @enter="emitSearch" />
+    <BaseButton @click="emitSearch">Search</BaseButton>
   </div>
 </template>
 
 <script lang="ts">
-import InputField from '../atoms/BaseInputField.vue';
-import BaseButton from '../atoms/BaseButton.vue';
+import InputField from "../atoms/BaseInputField.vue";
+import BaseButton from "../atoms/BaseButton.vue";
+import { defineComponent, ref } from "vue";
 
-export default {
-  name: 'SearchBar',
+export default defineComponent({
+  name: "SearchBar",
+  props: {
+    placeholder: {
+      type: String,
+      default: "Search here",
+    },
+    value: {
+      type: String,
+      default: "",
+    },
+  },
   components: {
     InputField,
-    BaseButton
+    BaseButton,
   },
-  data() {
+  setup(props, { emit }) {
+    const query = ref(props.value);
+
+    const emitSearch = () => {
+      emit("searchQuery", query.value);
+    };
+
     return {
-      query: ''
+      query,
+      emitSearch,
     };
   },
-  methods: {
-    search() {
-      //logic to search for news
-    }
-  }
-};
+});
 </script>
+
+<style scoped>
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+</style>

@@ -1,4 +1,4 @@
-import { CountryCodes } from "@/types/commonTypes";
+import { CountryCode } from "@/types/commonTypes";
 
 export enum NewsCategory {
   General = "general",
@@ -19,8 +19,9 @@ export interface Article {
 
 export interface NewsState {
   articles: Article[];
-  searchQuery: string;
-  activeCategory: NewsCategory;
-  country: CountryCodes;
-  cache: Map<string, Article[]>;
+  params: {
+    country: CountryCode;
+    category: NewsCategory;
+    query?: string;
+  };
 }
