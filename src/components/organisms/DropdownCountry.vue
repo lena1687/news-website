@@ -53,8 +53,8 @@ export default defineComponent({
       ),
     };
 
-    const onCountryChange = (country: CountryItem) => {
-      router.push({ params: { country: country.text } });
+    const onCountryChange = ({ text }: CountryItem) => {
+      router.push({ params: { country: text } });
     };
 
     return {

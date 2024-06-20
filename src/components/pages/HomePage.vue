@@ -1,6 +1,9 @@
 <template>
   <MainTemplate>
     <h1>HomePage</h1>
+    <div>
+      <IconText iconName="calendar" size="2rem"><CurrentTime /></IconText>
+    </div>
     <ArticleList :articles="articles" />
   </MainTemplate>
 </template>
@@ -10,10 +13,14 @@ import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
 import { computed, watch } from "vue";
 import { useNewsStore } from "@/stores/newsStore";
+import IconText from "@/components/molecules/IconText.vue";
+import CurrentTime from "@/components/atoms/CurrentTime.vue";
 
 export default {
   name: "HomePage",
   components: {
+    CurrentTime,
+    IconText,
     MainTemplate,
     ArticleList,
   },

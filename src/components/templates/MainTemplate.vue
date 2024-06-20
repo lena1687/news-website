@@ -1,22 +1,25 @@
 <template>
   <div>
-    <Header />
+    <MainHeader />
+    <NavMenu />
     <main>
       <slot></slot>
     </main>
-    <Footer />
+    <MainFooter />
   </div>
 </template>
 
 <script lang="ts">
-import Header from '../organisms/MainHeader.vue';
-import Footer from '../organisms/MainFooter.vue';
+import MainHeader from "../organisms/MainHeader.vue";
+import MainFooter from "../organisms/MainFooter.vue";
+import NavMenu from "@/components/molecules/NavMenu.vue";
 
 export default {
-  name: 'MainTemplate',
+  name: "MainTemplate",
   components: {
-    Header,
-    Footer
-  }
+    NavMenu,
+    MainHeader,
+    MainFooter,
+  },
 };
 </script>

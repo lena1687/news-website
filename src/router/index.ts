@@ -37,7 +37,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   const newsStore = useNewsStore();
   const { country, category } = to.params;
   const query = to.query.search as string;

@@ -1,6 +1,10 @@
 <template>
   <div class="search-bar">
-    <InputField v-model="query" @enter="emitSearch" />
+    <InputField
+      v-model="query"
+      @enter="emitSearch"
+      :placeholder="placeholder"
+    />
     <BaseButton @click="emitSearch">Search</BaseButton>
   </div>
 </template>
@@ -41,9 +45,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.search-bar {
-  display: flex;
-  align-items: center;
-}
+<style lang="sass" scoped>
+@import '@/assets/styles/molecules/SearchBar.sass'
 </style>
