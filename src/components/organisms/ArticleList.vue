@@ -1,29 +1,30 @@
 <template>
   <div class="article-list">
-    <div
+    <article
+      class="article-item"
       v-for="(article, index) in articles"
       :key="article.url + index"
-      class="article-item"
+      @click="redirectTo(article.url)"
     >
-      <img
-        :src="article.urlToImage"
-        width="50px"
-        height="50px"
-        alt="Article Image"
-      />
-      <h2>{{ article.title }}</h2>
-      <p>{{ article.description }}</p>
-      <a :href="article.url" target="_blank">Read more</a>
-    </div>
+      <img class="article-img" :src="article.urlToImage" :alt="article.title" />
+      <div class="article-content">
+        <div class="article_title">
+          {{ article.title }}
+        </div>
+        <span class="article-date">{{ formatDate(article.publishedAt) }}</span>
+      </div>
+    </article>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { Article } from "@/types/newsTypes";
+import { formatDate, redirectTo } from "@/utils/common";
 
 export default defineComponent({
   name: "ArticleList",
+  methods: { formatDate, redirectTo },
   props: {
     articles: {
       type: Array as PropType<Article[]>,
@@ -32,3 +33,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/organisms/ArticleList.sass'
+</style>

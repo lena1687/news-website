@@ -15,6 +15,7 @@ export interface Article {
   description: string;
   url: string;
   urlToImage: string;
+  publishedAt: string;
 }
 
 export interface NewsState {

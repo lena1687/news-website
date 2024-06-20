@@ -1,10 +1,14 @@
 <template>
   <MainTemplate>
-    <h1>HomePage</h1>
-    <div>
-      <IconText iconName="calendar" size="32px"><CurrentTime /></IconText>
+    <div class="home-page">
+      <div class="current-time-wrap">
+        <IconText iconName="calendar" size="16px"><CurrentTime /></IconText>
+      </div>
+      <div class="home-page__title">
+        <h1>Tops News</h1>
+      </div>
+      <ArticleList :articles="articles" />
     </div>
-    <ArticleList :articles="articles" />
   </MainTemplate>
 </template>
 
@@ -43,3 +47,7 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/pages/HomePage.sass'
+</style>
