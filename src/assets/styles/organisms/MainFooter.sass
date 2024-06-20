@@ -1,0 +1,32 @@
+@import '../vars/_colors.sass'
+@import '../vars/_typo.sass'
+
+.footer
+  .footer-content
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 20px
+    border-top: 2px solid $border-color
+
+    @media (max-width: 768px)
+      flex-direction: column
+
+      .footer-media
+        margin-top: 10px
+
+    .footer-copyright
+      @extend .typo-body
+
+    .footer-media
+      display: flex
+
+      &__link
+        margin-right: 20px
+        color: $primary-color
+
+        &:last-child
+          margin-right: 0
+
+        &:hover
+          transform: scale(1.2)
