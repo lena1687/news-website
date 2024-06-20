@@ -10,7 +10,6 @@
     align-items: center
     background: $background-color
     border: none
-    padding: 8px 12px
     cursor: pointer
     justify-content: space-between
 
@@ -24,6 +23,9 @@
     @extend .typo-label
     text-transform: uppercase
 
+    @media (max-width: 768px)
+      font-size: 18px
+
   &__list
     position: absolute
     top: 100%
@@ -32,7 +34,7 @@
     border: 1px solid $border-color
     list-style: none
     padding: 0
-    margin: 0
+    margin: 5px 0 0
     width: 100%
     box-shadow: 0 2px 8px $border-color
     z-index: 1000

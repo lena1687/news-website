@@ -1,6 +1,6 @@
 <template>
   <div class="header-heading">
-    <BaseIcon iconName="newspaper" size="2.6rem" />
+    <BaseIcon iconName="newspaper" size="42px" />
     <div class="header-heading__title">Reporter</div>
   </div>
 </template>

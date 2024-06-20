@@ -2,7 +2,7 @@
   <MainTemplate>
     <h1>HomePage</h1>
     <div>
-      <IconText iconName="calendar" size="2rem"><CurrentTime /></IconText>
+      <IconText iconName="calendar" size="32px"><CurrentTime /></IconText>
     </div>
     <ArticleList :articles="articles" />
   </MainTemplate>

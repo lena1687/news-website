@@ -1,6 +1,6 @@
 <template>
   <div class="icon-text">
-    <BaseIcon :iconName="iconName" size="2rem" />
+    <BaseIcon :iconName="iconName" size="32px" />
     <span class="text" :style="{ fontSize: textSize }"><slot></slot></span>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default defineComponent({
     size: {
       type: String,
       required: false,
-      default: "1rem",
+      default: "16px",
     },
   },
   setup(props) {
