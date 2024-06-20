@@ -3,7 +3,9 @@
     <MainHeader />
     <NavMenu />
     <main>
-      <slot></slot>
+      <div class="main-content">
+        <slot></slot>
+      </div>
     </main>
     <MainFooter />
   </div>
@@ -23,3 +25,7 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/templates/MainTemplate.sass'
+</style>

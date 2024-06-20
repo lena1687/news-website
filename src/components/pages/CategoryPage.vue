@@ -1,8 +1,9 @@
 <template>
   <MainTemplate>
-    <div>
-      <h1>CategoryPage</h1>
-      <h2>{{ activeCategory }}</h2>
+    <div class="category-page">
+      <div class="category-page__title">
+        <span>{{ activeCategory }}</span>
+      </div>
       <ArticleList :articles="articles" />
     </div>
   </MainTemplate>
@@ -44,3 +45,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/pages/CategoryPage.sass'
+</style>

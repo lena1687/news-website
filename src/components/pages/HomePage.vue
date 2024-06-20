@@ -5,7 +5,7 @@
         <IconText iconName="calendar" size="16px"><CurrentTime /></IconText>
       </div>
       <div class="home-page__title">
-        <h1>Tops News</h1>
+        <span>Tops News</span>
       </div>
       <ArticleList :articles="articles" />
     </div>
