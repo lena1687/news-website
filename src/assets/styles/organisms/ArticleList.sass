@@ -1,0 +1,45 @@
+@import '../vars/_colors.sass'
+@import '../vars/_typo.sass'
+
+.article-list
+  display: grid
+  gap: 15px
+  background-color: $background-color
+
+  @media (min-width: 600px)
+    grid-template-columns: repeat(2, 1fr)
+
+
+  @media (min-width: 900px)
+    grid-template-columns: repeat(3, 1fr)
+
+  .article-item
+    border: 1px solid $border-color
+    border-radius: 4px
+    overflow: hidden
+    background-color: $background-color
+    transition: transform 0.3s, box-shadow 0.3s
+    cursor: pointer
+
+    &:hover
+      transform: translateY(-5px)
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+
+    .article-img
+      width: 100%
+      height: 300px
+      object-fit: cover
+      border-radius: 4px 4px 0 0
+      margin-bottom: 16px
+
+    .article-content
+      padding: 10px
+
+      .article_title
+        @extend .typo-h3-highlight
+        margin: 0 0 10px
+
+      .article-date
+        @extend .typo-body-small
+        color: $light-font-color
+

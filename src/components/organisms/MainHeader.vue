@@ -1,23 +1,14 @@
 <template>
   <header>
-    <div>
-      <IconText iconName="calendar" size="2rem"><CurrentTime /></IconText>
-      <HeaderHeading />
-      <SearchBar :value="query" @searchQuery="searchNews" />
-      <DropdownCountry />
-    </div>
-    <div>
-      <NavMenu />
-    </div>
+    <DropdownCountry />
+    <HeaderHeading />
+    <SearchBar :value="query" @searchQuery="searchNews" />
   </header>
 </template>
 
 <script lang="ts">
 import SearchBar from "../molecules/SearchBar.vue";
-import CurrentTime from "@/components/atoms/CurrentTime.vue";
 import HeaderHeading from "@/components/molecules/HeaderHeading.vue";
-import IconText from "@/components/molecules/IconText.vue";
-import NavMenu from "@/components/molecules/NavMenu.vue";
 import DropdownCountry from "@/components/organisms/DropdownCountry.vue";
 import { useRouter } from "vue-router";
 import { useNewsStore } from "@/stores/newsStore";
@@ -27,10 +18,7 @@ export default {
   name: "MainHeader",
   components: {
     DropdownCountry,
-    NavMenu,
-    IconText,
     HeaderHeading,
-    CurrentTime,
     SearchBar,
   },
 
@@ -52,3 +40,7 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/organisms/MainHeader.sass'
+</style>

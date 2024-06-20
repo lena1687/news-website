@@ -1,7 +1,7 @@
 <template>
   <div class="icon-text">
-    <BaseIcon :iconName="iconName" size="2rem" />
-    <span class="text" :style="{ fontSize: textSize }"><slot></slot></span>
+    <BaseIcon :iconName="iconName" :size="iconSize" />
+    <div class="text" :style="{ fontSize: textSize }"><slot></slot></div>
   </div>
 </template>
 
@@ -23,17 +23,21 @@ export default defineComponent({
     size: {
       type: String,
       required: false,
-      default: "1rem",
+      default: "16px",
     },
   },
   setup(props) {
-    const iconSize = computed(() => props.size);
-    const textSize = computed(() => `calc(${props.size} * 0.75)`);
+    const textSize = computed(() => props.size);
+    const iconSize = computed(() => `calc(${props.size} * 0.9)`);
 
     return {
-      iconSize,
       textSize,
+      iconSize,
     };
   },
 });
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/molecules/IconText.sass'
+</style>

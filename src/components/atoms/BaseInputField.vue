@@ -1,5 +1,6 @@
 <template>
   <input
+    class="base-input-field"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     @keyup.enter="$emit('enter')"
@@ -23,3 +24,7 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/atoms/BaseInputField.sass'
+</style>

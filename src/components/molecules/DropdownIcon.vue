@@ -1,8 +1,14 @@
 <template>
   <div class="dropdown-icon">
     <button @click="toggleDropdown" class="dropdown-icon__button">
-      <span v-if="selectedItem?.icon" v-html="selectedItem?.icon"></span>
-      <span>{{ selectedItem?.text || "Select an option" }}</span>
+      <span
+        class="dropdown-icon__button-pic"
+        v-if="selectedItem?.icon"
+        v-html="selectedItem?.icon"
+      ></span>
+      <span class="dropdown-icon__button-text">{{
+        selectedItem?.text || "Select an option"
+      }}</span>
       <BaseIcon icon-name="chevron-down" />
     </button>
     <ul v-if="isOpen" class="dropdown-icon__list">
@@ -12,7 +18,11 @@
         @click="selectItem(item)"
         class="dropdown-icon__item"
       >
-        <span v-if="item.icon" v-html="item.icon"></span>
+        <span
+          v-if="item.icon"
+          v-html="item.icon"
+          class="dropdown-icon__symbol"
+        ></span>
         {{ item.text }}
       </li>
     </ul>
@@ -70,53 +80,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.dropdown-icon {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-icon__button {
-  display: flex;
-  align-items: center;
-  background: white;
-  border: 1px solid black;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.dropdown-icon__button span {
-  margin-left: 5px;
-}
-
-.dropdown-icon__arrow {
-  margin-left: auto;
-}
-
-.dropdown-icon__list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  border: 1px solid black;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.dropdown-icon__item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.dropdown-icon__item span {
-  margin-right: 8px;
-}
-
-.dropdown-icon__item:hover {
-  background: gray;
-}
+<style lang="sass" scoped>
+@import '@/assets/styles/molecules/DropdownIcon.sass'
 </style>

@@ -1,44 +1,48 @@
 <template>
-  <div :class="['icon-text', className]">
-    <font-awesome-icon :icon="iconObject" class="icon" :style="{ fontSize: size }" />
+  <div :class="['icon-wrap', className]">
+    <font-awesome-icon
+      :icon="iconObject"
+      class="icon"
+      :style="{ fontSize: size }"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, PropType} from 'vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
-import {IconPrefix} from "@fortawesome/free-solid-svg-icons";
+import { computed, defineComponent, PropType } from "vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { IconPrefix } from "@fortawesome/free-solid-svg-icons";
 
 export default defineComponent({
-  name: 'BaseIcon',
+  name: "BaseIcon",
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
   },
   props: {
     iconName: {
       type: String as PropType<IconName>,
-      required: true
+      required: true,
     },
     prefix: {
       type: String as PropType<IconPrefix>,
-      default: 'fa'
+      default: "fa",
     },
     size: {
       type: String,
       required: false,
-      default: '1rem'
+      default: "16px",
     },
     className: {
       type: String,
-      default: ''
-    }
+      default: "",
+    },
   },
   setup(props) {
     const iconObject = computed(() => [props.prefix, props.iconName]);
     return {
-      iconObject
+      iconObject,
     };
-  }
+  },
 });
 </script>

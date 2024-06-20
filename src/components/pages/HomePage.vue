@@ -1,7 +1,14 @@
 <template>
   <MainTemplate>
-    <h1>HomePage</h1>
-    <ArticleList :articles="articles" />
+    <div class="home-page">
+      <div class="current-time-wrap">
+        <IconText iconName="calendar" size="16px"><CurrentTime /></IconText>
+      </div>
+      <div class="home-page__title">
+        <span>Tops News</span>
+      </div>
+      <ArticleList :articles="articles" />
+    </div>
   </MainTemplate>
 </template>
 
@@ -10,10 +17,14 @@ import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
 import { computed, watch } from "vue";
 import { useNewsStore } from "@/stores/newsStore";
+import IconText from "@/components/molecules/IconText.vue";
+import CurrentTime from "@/components/atoms/CurrentTime.vue";
 
 export default {
   name: "HomePage",
   components: {
+    CurrentTime,
+    IconText,
     MainTemplate,
     ArticleList,
   },
@@ -36,3 +47,7 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+@import '@/assets/styles/pages/HomePage.sass'
+</style>
