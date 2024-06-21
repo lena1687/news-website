@@ -1,18 +1,16 @@
 <template>
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-copyright">&copy; 2024 News Website</div>
-      <div class="footer-media">
-        <a class="footer-media__link" :href="links.instagram" target="_blank"
-          ><BaseIcon icon-name="instagram" prefix="fab" size="36px"
-        /></a>
-        <a class="footer-media__link" :href="links.facebook" target="_blank"
-          ><BaseIcon icon-name="facebook" prefix="fab" size="36px"
-        /></a>
-        <a class="footer-media__link" :href="links.youtube" target="_blank"
-          ><BaseIcon icon-name="youtube" prefix="fab" size="36px"
-        /></a>
-      </div>
+    <div class="footer-copyright">&copy; 2024 News Website</div>
+    <div class="footer-media">
+      <a class="footer-media__link" :href="links.instagram" target="_blank"
+        ><BaseIcon icon-name="instagram" prefix="fab" size="36px"
+      /></a>
+      <a class="footer-media__link" :href="links.facebook" target="_blank"
+        ><BaseIcon icon-name="facebook" prefix="fab" size="36px"
+      /></a>
+      <a class="footer-media__link" :href="links.youtube" target="_blank"
+        ><BaseIcon icon-name="youtube" prefix="fab" size="36px"
+      /></a>
     </div>
   </footer>
 </template>

@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <MainHeader />
+  <MainHeader />
+  <main>
     <NavMenu />
-    <main>
-      <div class="main-content">
-        <slot></slot>
-      </div>
-    </main>
-    <MainFooter />
-  </div>
+    <div class="main-content">
+      <slot></slot>
+    </div>
+  </main>
+  <MainFooter />
 </template>
 
 <script lang="ts">
