@@ -1,4 +1,4 @@
-import { CountryCode } from "@/types/commonTypes";
+import { CountryCode } from "@/types";
 
 export function countryCodeToEmoji(countryCode: CountryCode) {
   const OFFSET = 0x1f1e6 - "A".charCodeAt(0);

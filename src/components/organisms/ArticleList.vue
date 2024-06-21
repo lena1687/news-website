@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
-import { type Article } from "@/types/newsTypes";
+import { type Article } from "@/types";
 import { formatDate, redirectTo } from "@/utils/common";
 import IconText from "@/components/molecules/IconText.vue";
 

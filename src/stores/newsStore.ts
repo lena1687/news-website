@@ -1,8 +1,17 @@
 import { defineStore } from "pinia";
 import { fetchArticles } from "@/services/newsService";
-import { type Article, NewsCategory, type NewsState } from "@/types/newsTypes";
-import { CountryCode } from "@/types/commonTypes";
+import { type Article, NewsCategory } from "@/types";
 import picNotFound from "@/assets/images/pic-not-found.jpg"
+import { CountryCode} from "@/types";
+
+export interface NewsState {
+  articles: Article[];
+  params: {
+    country: CountryCode;
+    category: NewsCategory;
+    query?: string;
+  };
+}
 
 export const useNewsStore = defineStore("news", {
   state: (): NewsState => ({

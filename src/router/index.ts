@@ -1,29 +1,25 @@
 import HomePage from "../components/pages/HomePage.vue";
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
-import { NewsCategory } from "@/types/newsTypes";
-import { CountryCode } from "@/types/commonTypes";
+import { NewsCategory } from "@/types";
+import { CountryCode } from "@/types";
 import { useNewsStore } from "@/stores/newsStore";
-
-const countryPath = `:country(${Object.values(CountryCode).join("|")})`;
-const categoryPath = `:category(${Object.values(NewsCategory).join("|")})`;
-const defaultPath = `${CountryCode.US}/${NewsCategory.General}`;
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: `/${countryPath}/:category(${NewsCategory.General})`,
+    path: `/:country(${Object.values(CountryCode).join("|")})/:category(${NewsCategory.General})`,
     name: "home",
     component: HomePage,
   },
   {
-    path: `/${countryPath}/${categoryPath}`,
+    path: `/:country(${Object.values(CountryCode).join("|")})/:category(${Object.values(NewsCategory).join("|")})`,
     name: "category",
     component: CategoryPage,
   },
 
   {
     path: "/",
-    redirect: `/${defaultPath}`,
+    redirect: `/${CountryCode.US}/${NewsCategory.General}`,
   },
 ];
 

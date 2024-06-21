@@ -1,6 +1,6 @@
 import axios from "axios";
-import type { Article, NewsCategory } from "@/types/newsTypes";
-import { CountryCode } from "@/types/commonTypes";
+import type { Article, NewsCategory } from "@/types";
+import { CountryCode } from "@/types";
 
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const BASE_URL = "https://newsapi.org/v2";

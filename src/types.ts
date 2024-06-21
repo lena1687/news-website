@@ -1,4 +1,8 @@
-import { CountryCode } from "@/types/commonTypes";
+export enum CountryCode {
+  NL = "nl",
+  GB = "gb",
+  US = "us",
+}
 
 export enum NewsCategory {
   General = "general",
@@ -18,11 +22,4 @@ export interface Article {
   publishedAt: string;
 }
 
-export interface NewsState {
-  articles: Article[];
-  params: {
-    country: CountryCode;
-    category: NewsCategory;
-    query?: string;
-  };
-}
+
