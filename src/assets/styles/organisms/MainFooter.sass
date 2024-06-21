@@ -1,5 +1,6 @@
 @import '../vars/_colors.sass'
 @import '../vars/_typo.sass'
+@import '../vars/_mediaQueries.sass'
 
 .footer
   display: flex
@@ -8,7 +9,7 @@
   padding: 20px
   border-top: 2px solid $border-color
 
-  @media (max-width: 768px)
+  @include breakpoint(small)
     flex-direction: column
 
     .footer-media

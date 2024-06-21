@@ -1,5 +1,6 @@
 @import '../vars/_colors.sass'
 @import '../vars/_typo.sass'
+@import '../vars/_mediaQueries.sass'
 
 .home-page
 
@@ -7,14 +8,14 @@
     @extend .typo-main-page-header
     margin: 0 0 50px
 
-    @media (max-width: 920px)
+    @include breakpoint(medium)
       margin: 0 0 20px
 
 
   .current-time-wrap
     margin-bottom: 20px
 
-    @media (max-width: 920px)
+    @include breakpoint(medium)
       margin-bottom: 10px
 
     .icon-text
