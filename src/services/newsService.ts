@@ -4,6 +4,7 @@ import { CountryCode } from "@/types";
 
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 const BASE_URL = "https://newsapi.org/v2";
+const PAGE_SIZE = 50;
 
 export const fetchArticles = async (
   country: CountryCode,
@@ -17,6 +18,7 @@ export const fetchArticles = async (
         category,
         q: query,
         apiKey: API_KEY,
+        pageSize: PAGE_SIZE,
       },
     });
     return response.data.articles;

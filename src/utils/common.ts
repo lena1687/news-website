@@ -19,7 +19,3 @@ export function formatDate(isoDate: string): string {
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   return `${day} ${month}, ${year} - ${hours}:${minutes}`;
 }
-
-export function redirectTo(url: string) {
-  window.location.href = url;
-}

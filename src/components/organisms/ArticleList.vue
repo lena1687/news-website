@@ -5,11 +5,12 @@
     >
   </div>
   <div v-else class="article-list">
-    <article
+    <a
       class="article-item"
       v-for="(article, index) in articles"
       :key="article.url + index"
-      @click="redirectTo(article.url)"
+      :href="article.url"
+      target="_blank"
     >
       <img class="article-img" :src="article.urlToImage" :alt="article.title" />
       <div class="article-content">
@@ -18,20 +19,20 @@
         </div>
         <span class="article-date">{{ formatDate(article.publishedAt) }}</span>
       </div>
-    </article>
+    </a>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, type PropType } from "vue";
 import { type Article } from "@/types";
-import { formatDate, redirectTo } from "@/utils/common";
+import { formatDate } from "@/utils/common";
 import IconText from "@/components/molecules/IconText.vue";
 
 export default defineComponent({
   name: "ArticleList",
   components: { IconText },
-  methods: { formatDate, redirectTo },
+  methods: { formatDate },
   props: {
     articles: {
       type: Array as PropType<Article[]>,
