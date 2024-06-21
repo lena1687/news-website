@@ -10,7 +10,7 @@
 import { computed, defineComponent } from "vue";
 import DropdownIcon from "@/components/molecules/DropdownIcon.vue";
 import emojione from "emojione";
-import { CountryCode } from "@/types/commonTypes";
+import { CountryCode } from "@/types";
 import { countryCodeToEmoji } from "@/utils/common";
 import { useRouter } from "vue-router";
 import { useNewsStore } from "@/stores/newsStore";

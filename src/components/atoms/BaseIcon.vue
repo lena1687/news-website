@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
+import { computed, defineComponent, type PropType } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
-import { IconPrefix } from "@fortawesome/free-solid-svg-icons";
+import { type IconName } from "@fortawesome/fontawesome-svg-core";
+import { type IconPrefix } from "@fortawesome/free-solid-svg-icons";
 
 export default defineComponent({
   name: "BaseIcon",

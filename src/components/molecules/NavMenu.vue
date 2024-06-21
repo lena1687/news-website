@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import { NewsCategory } from "@/types/newsTypes";
+import { NewsCategory } from "@/types";
 import { useRouter } from "vue-router";
 import { useNewsStore } from "@/stores/newsStore";
 import BaseIcon from "@/components/atoms/BaseIcon.vue";

@@ -12,7 +12,7 @@
 <script lang="ts">
 import InputField from "../atoms/BaseInputField.vue";
 import BaseButton from "../atoms/BaseButton.vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   name: "SearchBar",
@@ -36,6 +36,10 @@ export default defineComponent({
     const emitSearch = () => {
       emit("searchQuery", query.value);
     };
+
+    watch(props, ({ value }) => {
+      query.value = value;
+    });
 
     return {
       query,

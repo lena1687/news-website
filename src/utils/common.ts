@@ -1,4 +1,4 @@
-import { CountryCode } from "@/types/commonTypes";
+import { CountryCode } from "@/types";
 
 export function countryCodeToEmoji(countryCode: CountryCode) {
   const OFFSET = 0x1f1e6 - "A".charCodeAt(0);
@@ -18,8 +18,4 @@ export function formatDate(isoDate: string): string {
   const hours = date.getUTCHours().toString().padStart(2, "0");
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   return `${day} ${month}, ${year} - ${hours}:${minutes}`;
-}
-
-export function redirectTo(url: string) {
-  window.location.href = url;
 }

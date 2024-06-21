@@ -1,32 +1,32 @@
 @import '../vars/_colors.sass'
 @import '../vars/_typo.sass'
+@import '../vars/_mediaQueries.sass'
 
 .footer
-  .footer-content
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 20px
-    border-top: 2px solid $border-color
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 20px
+  border-top: 2px solid $border-color
 
-    @media (max-width: 768px)
-      flex-direction: column
-
-      .footer-media
-        margin-top: 10px
-
-    .footer-copyright
-      font-weight: 400
+  @include breakpoint(small)
+    flex-direction: column
 
     .footer-media
-      display: flex
+      margin-top: 10px
 
-      &__link
-        margin-right: 20px
-        color: $primary-color
+  .footer-copyright
+    font-weight: 400
 
-        &:last-child
-          margin-right: 0
+  .footer-media
+    display: flex
 
-        &:hover
-          transform: scale(1.2)
+    &__link
+      margin-right: 20px
+      color: $primary-color
+
+      &:last-child
+        margin-right: 0
+
+      &:hover
+        transform: scale(1.2)

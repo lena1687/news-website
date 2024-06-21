@@ -1,6 +1,16 @@
 @import '../vars/_typo.sass'
+@import '../vars/_mediaQueries.sass'
+
+main
+  display: flex
+  flex-direction: column
+  flex: 1
+
+  & > *
+    padding: 0 20px
 
 .main-content
   margin: 40px 0 60px
-  padding: 0 20px
 
+  @include breakpoint(medium)
+    margin: 10px 0 40px

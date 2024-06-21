@@ -1,12 +1,21 @@
 @import 'vars/_colors.sass'
 @import 'vars/_typo.sass'
 
-body
-  display: flex
-  flex-direction: column
-  font-family: $font-family
+html, body
+  height: 100%
   margin: 0
+
+body
+  font-family: $font-family
   padding: 0
-  min-height: 100vh
   color: $font-color
   @extend .typo-body
+
+.container
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+a
+  text-decoration: none
+

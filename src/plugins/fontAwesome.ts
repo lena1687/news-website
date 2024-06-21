@@ -4,6 +4,7 @@ import {
   faNewspaper,
   faChevronDown,
   faBars,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
@@ -19,7 +20,8 @@ library.add(
   faBars,
   faInstagram,
   faFacebook,
-  faYoutube
+  faYoutube,
+  faExclamationTriangle
 );
 
 export default FontAwesomeIcon;
