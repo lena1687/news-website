@@ -3,14 +3,19 @@
 
 .home-page
 
+  &__title
+    @extend .typo-main-page-header
+    margin: 0 0 50px
+
+    @media (max-width: 920px)
+      margin: 0 0 20px
+
+
   .current-time-wrap
+    margin-bottom: 20px
+
+    @media (max-width: 920px)
+      margin-bottom: 10px
 
     .icon-text
       color: $primary-color
-
-  &__title
-    margin: 30px 0 50px
-    @extend .typo-h2-subheader
-
-    &::first-letter
-      text-transform: capitalize
