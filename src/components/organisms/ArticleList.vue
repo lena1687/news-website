@@ -1,5 +1,10 @@
 <template>
-  <div class="article-list">
+  <div v-if="articles.length === 0">
+    <IconText iconName="exclamation-triangle" size="16px"
+      >No articles available.</IconText
+    >
+  </div>
+  <div v-else class="article-list">
     <article
       class="article-item"
       v-for="(article, index) in articles"
@@ -21,9 +26,11 @@
 import { defineComponent, PropType } from "vue";
 import { Article } from "@/types/newsTypes";
 import { formatDate, redirectTo } from "@/utils/common";
+import IconText from "@/components/molecules/IconText.vue";
 
 export default defineComponent({
   name: "ArticleList",
+  components: { IconText },
   methods: { formatDate, redirectTo },
   props: {
     articles: {
