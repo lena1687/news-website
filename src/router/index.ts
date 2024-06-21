@@ -1,14 +1,9 @@
 import HomePage from "../components/pages/HomePage.vue";
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
 import { NewsCategory } from "@/types/newsTypes";
 import { CountryCode } from "@/types/commonTypes";
 import { useNewsStore } from "@/stores/newsStore";
-
-interface RouteParams {
-  country: CountryCode;
-  category?: NewsCategory;
-}
 
 const countryPath = `:country(${Object.values(CountryCode).join("|")})`;
 const categoryPath = `:category(${Object.values(NewsCategory).join("|")})`;

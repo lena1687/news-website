@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { fetchArticles } from "@/services/newsService";
-import { Article, NewsCategory, NewsState } from "@/types/newsTypes";
+import { type Article, NewsCategory, type NewsState } from "@/types/newsTypes";
 import { CountryCode } from "@/types/commonTypes";
+import picNotFound from "@/assets/images/pic-not-found.jpg"
 
 export const useNewsStore = defineStore("news", {
   state: (): NewsState => ({
@@ -41,6 +42,6 @@ function filterAndFormatArticles(articles: Article[]): Article[] {
     .map((article: Article) => ({
       ...article,
       urlToImage:
-        article.urlToImage || require("@/assets/images/pic-not-found.jpg"),
+        article.urlToImage || picNotFound,
     }));
 }

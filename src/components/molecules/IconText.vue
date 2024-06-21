@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import BaseIcon from "@/components/atoms/BaseIcon.vue";
-import { defineComponent, computed, PropType } from "vue";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
+import { defineComponent, computed, type PropType } from "vue";
+import { type IconName } from "@fortawesome/fontawesome-svg-core";
 
 export default defineComponent({
   name: "IconText",
