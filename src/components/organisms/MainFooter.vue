@@ -20,9 +20,9 @@ import BaseIcon from "@/components/atoms/BaseIcon.vue";
 import { SOCIAL_MEDIA_LINKS } from "@/constants";
 
 export default {
-  name: "MainFooter",
+  name: 'MainFooter',
   components: { BaseIcon },
-  data() {
+  setup() {
     return {
       links: SOCIAL_MEDIA_LINKS,
     };

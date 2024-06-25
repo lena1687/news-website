@@ -23,28 +23,24 @@ interface CountryItem {
 export default defineComponent({
   name: "DropdownCountry",
   components: { DropdownIcon },
-  data() {
-    return {
-      countries: [
-        {
-          text: CountryCode.NL,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCode.NL)),
-        },
-        {
-          text: CountryCode.GB,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCode.GB)),
-        },
-        {
-          text: CountryCode.US,
-          icon: emojione.toImage(countryCodeToEmoji(CountryCode.US)),
-        },
-      ],
-    };
-  },
 
   setup() {
     const router = useRouter();
     const newsStore = useNewsStore();
+    const countries = [
+      {
+        text: CountryCode.NL,
+        icon: emojione.toImage(countryCodeToEmoji(CountryCode.NL)),
+      },
+      {
+        text: CountryCode.GB,
+        icon: emojione.toImage(countryCodeToEmoji(CountryCode.GB)),
+      },
+      {
+        text: CountryCode.US,
+        icon: emojione.toImage(countryCodeToEmoji(CountryCode.US)),
+      },
+    ];
     const countryCode = computed(() => newsStore.params.country);
     const defaultCountry: CountryItem = {
       text: countryCode.value,
@@ -58,6 +54,7 @@ export default defineComponent({
     };
 
     return {
+      countries,
       defaultCountry,
       onCountryChange,
     };
