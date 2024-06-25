@@ -15,12 +15,12 @@
 <script lang="ts">
 import MainTemplate from "../templates/MainTemplate.vue";
 import ArticleList from "../organisms/ArticleList.vue";
-import { computed, watch } from "vue";
+import {computed, defineComponent, watch} from "vue";
 import { useNewsStore } from "@/stores/newsStore";
 import IconText from "@/components/molecules/IconText.vue";
 import CurrentTime from "@/components/atoms/CurrentTime.vue";
 
-export default {
+export default defineComponent ({
   name: "HomePage",
   components: {
     CurrentTime,
@@ -45,7 +45,7 @@ export default {
       articles,
     };
   },
-};
+});
 </script>
 
 <style lang="sass" scoped>

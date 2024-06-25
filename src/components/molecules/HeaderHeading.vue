@@ -7,13 +7,14 @@
 
 <script lang="ts">
 import BaseIcon from "@/components/atoms/BaseIcon.vue";
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent ({
   name: "HeaderHeading",
   components: {
     BaseIcon,
   },
-};
+});
 </script>
 
 <style lang="sass" scoped>
