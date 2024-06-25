@@ -18,16 +18,17 @@
 <script lang="ts">
 import BaseIcon from "@/components/atoms/BaseIcon.vue";
 import { SOCIAL_MEDIA_LINKS } from "@/constants";
+import {defineComponent} from "vue";
 
-export default {
-  name: "MainFooter",
+export default defineComponent ({
+  name: 'MainFooter',
   components: { BaseIcon },
-  data() {
+  setup() {
     return {
       links: SOCIAL_MEDIA_LINKS,
     };
   },
-};
+});
 </script>
 
 <style lang="sass" scoped>

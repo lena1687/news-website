@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import BaseIcon from "@/components/atoms/BaseIcon.vue";
 
 export interface DropdownItem {
@@ -51,11 +51,8 @@ export default defineComponent({
       default: null,
     },
   },
-  mounted() {
-    if (this.defaultItem) {
-      this.selectedItem = this.defaultItem;
-    }
-  },
+  emits: ["select-item"],
+
   setup(props, { emit }) {
     const isOpen = ref(false);
     const selectedItem = ref<DropdownItem | null>(null);
@@ -69,6 +66,12 @@ export default defineComponent({
       selectedItem.value = item;
       isOpen.value = false;
     };
+
+    onMounted(() => {
+      if (props.defaultItem) {
+        selectedItem.value = props.defaultItem;
+      }
+    });
 
     return {
       isOpen,

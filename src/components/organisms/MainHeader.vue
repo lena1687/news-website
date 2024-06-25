@@ -12,9 +12,9 @@ import HeaderHeading from "@/components/molecules/HeaderHeading.vue";
 import DropdownCountry from "@/components/organisms/DropdownCountry.vue";
 import { useRouter } from "vue-router";
 import { useNewsStore } from "@/stores/newsStore";
-import { computed } from "vue";
+import {computed, defineComponent} from "vue";
 
-export default {
+export default defineComponent ({
   name: "MainHeader",
   components: {
     DropdownCountry,
@@ -38,7 +38,7 @@ export default {
       query,
     };
   },
-};
+});
 </script>
 
 <style lang="sass" scoped>

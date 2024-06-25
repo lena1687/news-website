@@ -13,15 +13,16 @@
 import MainHeader from "../organisms/MainHeader.vue";
 import MainFooter from "../organisms/MainFooter.vue";
 import NavMenu from "@/components/molecules/NavMenu.vue";
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent ( {
   name: "MainTemplate",
   components: {
     NavMenu,
     MainHeader,
     MainFooter,
   },
-};
+});
 </script>
 
 <style lang="sass" scoped>
