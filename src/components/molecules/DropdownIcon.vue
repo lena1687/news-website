@@ -51,6 +51,7 @@ export default defineComponent({
       default: null,
     },
   },
+  emits: ["select-item"],
 
   setup(props, { emit }) {
     const isOpen = ref(false);

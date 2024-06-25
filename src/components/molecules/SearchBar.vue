@@ -30,6 +30,8 @@ export default defineComponent({
     InputField,
     BaseButton,
   },
+  emits: ["searchQuery"],
+
   setup(props, { emit }) {
     const query = ref(props.value);
 
